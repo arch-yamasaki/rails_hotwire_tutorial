@@ -18,6 +18,11 @@
 
 <% end %>
 
+ <%# ソートのリンク。このリンクをクリックするとname属性でソートされる %>
+ <%= sort_link(@search, :name) %>
+ <%# ソートのリンク。このリンクをクリックするとage属性でソートされる %>
+ <%= sort_link(@search, :age) %>
+
 <div id="cats">
   <% @cats.each do |cat| %>
     <%= render cat %>
