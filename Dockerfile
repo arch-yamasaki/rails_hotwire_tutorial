@@ -1,5 +1,5 @@
 FROM ruby:3.1
-RUN apt update -qq && apt install -y postgresql-client ruby-dev vim \
+RUN apt update -qq && apt install -y postgresql-client ruby-dev vim npm \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
