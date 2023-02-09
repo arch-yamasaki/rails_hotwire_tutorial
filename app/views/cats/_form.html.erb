@@ -1,27 +1,8 @@
-<%= form_with(model: cat) do |form| %>
-  <% if cat.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
+<%= bootstrap_form_with(model: cat) do |form| %>
 
-      <ul>
-        <% cat.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form.text_field :name %>
+<%= form.text_field :age %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+<%= form.primary %>
 
-  <div>
-    <%= form.label :age, style: "display: block" %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
