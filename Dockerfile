@@ -1,13 +1,24 @@
 FROM ruby:3.1
-RUN apt update -qq && apt install -y postgresql-client ruby-dev vim npm \
+
+
+# npm(とnode)はcssでbootstrapなどを指定した場合に必要なので入れる
+RUN apt update -qq && \
+    apt install -y postgresql-client ruby-dev npm vim \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+# linuxで入るnodeは古いものなので、nを使用して最新版に変更する。
+RUN npm install --global n
+RUN n stable
+RUN apt purge -y nodejs npm
+RUN npm install --global yarn
+
+# bundle install
 ENV HOMEDIR "/app"
 RUN mkdir ${HOMEDIR}
 WORKDIR ${HOMEDIR}
 ADD Gemfile ${HOMEDIR}/Gemfile
-# ADD Gemfile.lock /${HOMEDIR}/Gemfile.lock
+ADD Gemfile.lock /${HOMEDIR}/Gemfile.lock
 RUN bundle install
 
 # COPY entrypoint.sh /usr/bin/entrypoint.sh
